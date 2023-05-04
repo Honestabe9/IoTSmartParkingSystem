@@ -1,156 +1,66 @@
-// #include <Arduino.h>
-// #include <TinyGPS++.h>
-// #include <SoftwareSerial.h>
-// #include <HardwareSerial.h>
-
-// //HardwareSerial mySerial1(2);
-// //HardwareSerial mySerial2(4);
-
-// TinyGPSPlus gps;
-// SoftwareSerial mySerial1(3, 4);
-
-// void setup() {
-//   // put your setup code here, to run once:
-//   Serial.begin(9600);
-//   mySerial1.begin(9600);
-//   //mySerial1.begin(9600, 4, 3);
-//   //mySerial2.begin(9600);
-//   Serial.println("GPS Start");
-// }
-
-// void loop() {
-//   // put your main code here, to run repeatedly:
-//   gps.encode(Serial.read());
-//   if(Serial1.available() > 0) {
-//     gps.encode(Serial.read());
-//     Serial.println("Test while loop");
-//     Serial.write(Serial1.read());
-//   } 
-//   //else {
-//     //Serial.println("test else");
-//   //}
-
-//   if(gps.location.isUpdated()) {
-//     Serial.println("Satellite Count: ");
-//     Serial.println(gps.satellites.value());
-//     Serial.println("Latitude: ");
-//     Serial.println(gps.location.lat(), 6);
-//     Serial.println("Longitude: ");
-//     Serial.println(gps.location.lng(), 6);
-//     Serial.println("Speed MPH: ");
-//     Serial.println(gps.speed.mph());
-//     Serial.println("Altitude Feet: ");
-//     Serial.println(gps.altitude.feet());
-//     Serial.println();
-//   }
-//   Serial.println("Longitude: ");
-//   Serial.println(gps.location.lng(), 6);
-//   int data = Serial1.read();
-//   Serial.write(data);
-// }
-// #include <TinyGPSPlus.h>
-// /* 
-//    This sample sketch should be the first you try out when you are testing a TinyGPSPlus
-//    (TinyGPSPlus) installation.  In normal use, you feed TinyGPSPlus objects characters from
-//    a serial NMEA GPS device, but this example uses static strings for simplicity.
-// */
-
-// // A sample NMEA stream.
-// const char *gpsStream =
-//   "$GPRMC,045103.000,A,3014.1984,N,09749.2872,W,0.67,161.46,030913,,,A*7C\r\n"
-//   "$GPGGA,045104.000,3014.1985,N,09749.2873,W,1,09,1.2,211.6,M,-22.5,M,,0000*62\r\n"
-//   "$GPRMC,045200.000,A,3014.3820,N,09748.9514,W,36.88,65.02,030913,,,A*77\r\n"
-//   "$GPGGA,045201.000,3014.3864,N,09748.9411,W,1,10,1.2,200.8,M,-22.5,M,,0000*6C\r\n"
-//   "$GPRMC,045251.000,A,3014.4275,N,09749.0626,W,0.51,217.94,030913,,,A*7D\r\n"
-//   "$GPGGA,045252.000,3014.4273,N,09749.0628,W,1,09,1.3,206.9,M,-22.5,M,,0000*6F\r\n";
-
-// // The TinyGPSPlus object
-// TinyGPSPlus gps;
-
-// void displayInfo()
-// {
-//   Serial.print(F("Location: ")); 
-//   if (gps.location.isValid())
-//   {
-//     Serial.print(gps.location.lat(), 6);
-//     Serial.print(F(","));
-//     Serial.print(gps.location.lng(), 6);
-//   }
-//   else
-//   {
-//     Serial.print(F("INVALID"));
-//   }
-
-//   Serial.print(F("  Date/Time: "));
-//   if (gps.date.isValid())
-//   {
-//     Serial.print(gps.date.month());
-//     Serial.print(F("/"));
-//     Serial.print(gps.date.day());
-//     Serial.print(F("/"));
-//     Serial.print(gps.date.year());
-//   }
-//   else
-//   {
-//     Serial.print(F("INVALID"));
-//   }
-
-//   Serial.print(F(" "));
-//   if (gps.time.isValid())
-//   {
-//     if (gps.time.hour() < 10) Serial.print(F("0"));
-//     Serial.print(gps.time.hour());
-//     Serial.print(F(":"));
-//     if (gps.time.minute() < 10) Serial.print(F("0"));
-//     Serial.print(gps.time.minute());
-//     Serial.print(F(":"));
-//     if (gps.time.second() < 10) Serial.print(F("0"));
-//     Serial.print(gps.time.second());
-//     Serial.print(F("."));
-//     if (gps.time.centisecond() < 10) Serial.print(F("0"));
-//     Serial.print(gps.time.centisecond());
-//   }
-//   else
-//   {
-//     Serial.print(F("INVALID"));
-//   }
-
-//   Serial.println();
-// }
-
-// void setup()
-// {
-//   Serial.begin(9600);
-
-//   Serial.println("test\n\n");
-
-//   Serial.println(F("BasicExample.ino"));
-//   Serial.println(F("Basic demonstration of TinyGPSPlus (no device needed)"));
-//   Serial.print(F("Testing TinyGPSPlus library v. ")); Serial.println(TinyGPSPlus::libraryVersion());
-//   Serial.println(F("by Mikal Hart"));
-//   Serial.println();
-
-//   while (*gpsStream)
-//     if (gps.encode(*gpsStream++))
-//       displayInfo();
-
-//   Serial.println();
-//   Serial.println(F("Done."));
-// }
-
-// void loop()
-// {
-// }
-
+#include "LoRaWan_APP.h"
+#include <Arduino.h>
 #include <TinyGPSPlus.h>
 #include <SoftwareSerial.h>
-/*
-   This sample code demonstrates the normal use of a TinyGPSPlus (TinyGPSPlus) object.
-   It requires the use of SoftwareSerial, and assumes that you have a
-   4800-baud serial GPS device hooked up on pins 4(rx) and 3(tx).
+
+uint8_t devEui[] = {};  
+bool overTheAirActivation = false;
+uint8_t appEui[] = {};  // you should set whatever your TTN generates. TTN calls this the joinEUI, they are the same thing. 
+uint8_t appKey[] = {};  // you should set whatever your TTN generates 
+
+//These are only used for ABP, for OTAA, these values are generated on the Nwk Server, you should not have to change these values
+uint8_t nwkSKey[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+uint8_t appSKey[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+uint32_t devAddr =  (uint32_t)0x00000000;  
+
+/*LoraWan channelsmask*/
+uint16_t userChannelsMask[6]={ 0xFF00,0x0000,0x0000,0x0000,0x0000,0x0000 };
+
+/*LoraWan region, select in arduino IDE tools*/
+LoRaMacRegion_t loraWanRegion = ACTIVE_REGION;  // we define this as a user flag in the .ini file. 
+
+/*LoraWan Class, Class A and Class C are supported*/
+DeviceClass_t  loraWanClass = CLASS_A;
+
+/*the application data transmission duty cycle.  value in [ms].*/
+uint32_t appTxDutyCycle = 15000;
+
+/*ADR enable*/
+bool loraWanAdr = true;
+
+// uint32_t license[4] = {};
+
+/* Indicates if the node is sending confirmed or unconfirmed messages */
+bool isTxConfirmed = true;
+
+/* Application port */
+uint8_t appPort = 1;
+/*!
+* Number of trials to transmit the frame, if the LoRaMAC layer did not
+* receive an acknowledgment. The MAC performs a datarate adaptation,
+* according to the LoRaWAN Specification V1.0.2, chapter 18.4, according
+* to the following table:
+*
+* Transmission nb | Data Rate
+* ----------------|-----------
+* 1 (first)       | DR
+* 2               | DR
+* 3               | max(DR-1,0)
+* 4               | max(DR-1,0)
+* 5               | max(DR-2,0)
+* 6               | max(DR-2,0)
+* 7               | max(DR-3,0)
+* 8               | max(DR-3,0)
+*
+* Note, that if NbTrials is set to 1 or 2, the MAC will not decrease
+* the datarate, in case the LoRaMAC layer did not receive an acknowledgment
 */
+uint8_t confirmedNbTrials = 8;
+
 static const int RXPin = 4, TXPin = 3;
 static const uint32_t GPSBaud = 9600;
+
+const byte button = 0;
 
 // The TinyGPSPlus object
 TinyGPSPlus gps;
@@ -158,8 +68,29 @@ TinyGPSPlus gps;
 // The serial connection to the GPS device
 SoftwareSerial ss(RXPin, TXPin);
 
-// This custom version of delay() ensures that the gps object
-// is being "fed".
+/* Prepares the payload of the frame */
+static void prepareTxFrame( uint8_t port )
+{
+	/*appData size is LORAWAN_APP_DATA_MAX_SIZE which is defined in "commissioning.h".
+	*appDataSize max value is LORAWAN_APP_DATA_MAX_SIZE.
+	*if enabled AT, don't modify LORAWAN_APP_DATA_MAX_SIZE, it may cause system hanging or failure.
+	*if disabled AT, LORAWAN_APP_DATA_MAX_SIZE can be modified, the max value is reference to lorawan region and SF.
+	*for example, if use REGION_CN470, 
+	*the max value for different DR can be found in MaxPayloadOfDatarateCN470 refer to DataratesCN470 and BandwidthsCN470 in "RegionCN470.h".
+	*/
+    // This data can be changed, just make sure to change the datasize as well. 
+    appDataSize = 4;
+    appData[0] = 0x80;
+    appData[1] = 0x00;
+    appData[2] = 0x00;
+    appData[3] = 0x01;
+
+	Serial.println("Latitude: ");
+	Serial.println(gps.location.lat(), 6);
+	Serial.println("Longitude: ");
+  	Serial.println(gps.location.lng(), 6);
+}
+
 static void smartDelay(unsigned long ms)
 {
   unsigned long start = millis();
@@ -170,134 +101,79 @@ static void smartDelay(unsigned long ms)
   } while (millis() - start < ms);
 }
 
-static void printFloat(float val, bool valid, int len, int prec)
-{
-  if (!valid)
-  {
-    while (len-- > 1)
-      Serial.print('*');
-    Serial.print(' ');
-  }
-  else
-  {
-    Serial.print(val, prec);
-    int vi = abs((int)val);
-    int flen = prec + (val < 0.0 ? 2 : 1); // . and -
-    flen += vi >= 1000 ? 4 : vi >= 100 ? 3 : vi >= 10 ? 2 : 1;
-    for (int i=flen; i<len; ++i)
-      Serial.print(' ');
-  }
-  smartDelay(0);
+/*
+ * Button interrupt handler
+ * When button is pressed (interrupt), this function will be ran to handle it.
+*/
+bool buttonPressed = false;
+void buttonIRQ() {
+  buttonPressed = true;
 }
 
-static void printInt(unsigned long val, bool valid, int len)
-{
-  char sz[32] = "*****************";
-  if (valid)
-    sprintf(sz, "%ld", val);
-  sz[len] = 0;
-  for (int i=strlen(sz); i<len; ++i)
-    sz[i] = ' ';
-  if (len > 0) 
-    sz[len-1] = ' ';
-  Serial.print(sz);
-  smartDelay(0);
-}
 
-static void printDateTime(TinyGPSDate &d, TinyGPSTime &t)
-{
-  if (!d.isValid())
-  {
-    Serial.print(F("********** "));
-  }
-  else
-  {
-    char sz[32];
-    sprintf(sz, "%02d/%02d/%02d ", d.month(), d.day(), d.year());
-    Serial.print(sz);
-  }
-  
-  if (!t.isValid())
-  {
-    Serial.print(F("******** "));
-  }
-  else
-  {
-    char sz[32];
-    sprintf(sz, "%02d:%02d:%02d ", t.hour(), t.minute(), t.second());
-    Serial.print(sz);
-  }
+RTC_DATA_ATTR bool firstrun = true;
 
-  printInt(d.age(), d.isValid(), 5);
-  smartDelay(0);
-}
-
-static void printStr(const char *str, int len)
-{
-  int slen = strlen(str);
-  for (int i=0; i<len; ++i)
-    Serial.print(i<slen ? str[i] : ' ');
-  smartDelay(0);
-}
-
-void setup()
-{
+void setup() {
   Serial.begin(9600);
   ss.begin(GPSBaud);
-
-  Serial.println(F("FullExample.ino"));
-  Serial.println(F("An extensive example of many interesting TinyGPSPlus features"));
-  Serial.print(F("Testing TinyGPSPlus library v. ")); Serial.println(TinyGPSPlus::libraryVersion());
-  Serial.println(F("by Mikal Hart"));
-  Serial.println();
-  Serial.println(F("Sats HDOP  Latitude   Longitude   Fix  Date       Time     Date Alt    Course Speed Card  Distance Course Card  Chars Sentences Checksum"));
-  Serial.println(F("           (deg)      (deg)       Age                      Age  (m)    --- from GPS ----  ---- to London  ----  RX    RX        Fail"));
-  Serial.println(F("----------------------------------------------------------------------------------------------------------------------------------------"));
+  smartDelay(0);
+  Mcu.begin();
+  if(firstrun)
+  {
+    LoRaWAN.displayMcuInit();
+    firstrun = false;
+  }
+	deviceState = DEVICE_STATE_INIT;
 }
 
 void loop()
 {
-  static const double LONDON_LAT = 51.508131, LONDON_LON = -0.128002;
-
-  printInt(gps.satellites.value(), gps.satellites.isValid(), 5);
-  printFloat(gps.hdop.hdop(), gps.hdop.isValid(), 6, 1);
-  printFloat(gps.location.lat(), gps.location.isValid(), 11, 10);
-  printFloat(gps.location.lng(), gps.location.isValid(), 12, 10);
-  printInt(gps.location.age(), gps.location.isValid(), 5);
-  printDateTime(gps.date, gps.time);
-  printFloat(gps.altitude.meters(), gps.altitude.isValid(), 7, 2);
-  printFloat(gps.course.deg(), gps.course.isValid(), 7, 2);
-  printFloat(gps.speed.kmph(), gps.speed.isValid(), 6, 2);
-  printStr(gps.course.isValid() ? TinyGPSPlus::cardinal(gps.course.deg()) : "*** ", 6);
-
-  unsigned long distanceKmToLondon =
-    (unsigned long)TinyGPSPlus::distanceBetween(
-      gps.location.lat(),
-      gps.location.lng(),
-      LONDON_LAT, 
-      LONDON_LON) / 1000;
-  printInt(distanceKmToLondon, gps.location.isValid(), 9);
-
-  double courseToLondon =
-    TinyGPSPlus::courseTo(
-      gps.location.lat(),
-      gps.location.lng(),
-      LONDON_LAT, 
-      LONDON_LON);
-
-  printFloat(courseToLondon, gps.location.isValid(), 7, 2);
-
-  const char *cardinalToLondon = TinyGPSPlus::cardinal(courseToLondon);
-
-  printStr(gps.location.isValid() ? cardinalToLondon : "*** ", 6);
-
-  printInt(gps.charsProcessed(), true, 6);
-  printInt(gps.sentencesWithFix(), true, 10);
-  printInt(gps.failedChecksum(), true, 9);
-  Serial.println();
-  
-  smartDelay(1000);
-
-  if (millis() > 5000 && gps.charsProcessed() < 10)
-    Serial.println(F("No GPS data received: check wiring"));
+	switch( deviceState )
+	{
+		case DEVICE_STATE_INIT:
+		{
+#if(LORAWAN_DEVEUI_AUTO)
+			LoRaWAN.generateDeveuiByChipID();
+#endif
+			LoRaWAN.init(loraWanClass,loraWanRegion);
+			break;
+		}
+		case DEVICE_STATE_JOIN:
+		{
+      LoRaWAN.displayJoining();
+			LoRaWAN.join();
+			if (deviceState == DEVICE_STATE_SEND){
+			 	LoRaWAN.displayJoined();
+			}
+			break;
+		}
+		case DEVICE_STATE_SEND:
+		{
+      		LoRaWAN.displaySending();
+			prepareTxFrame( appPort );
+			LoRaWAN.send();
+			deviceState = DEVICE_STATE_CYCLE;
+			break;
+		}
+		case DEVICE_STATE_CYCLE:
+		{
+			// Schedule next packet transmission
+			txDutyCycleTime = appTxDutyCycle + randr( 0, APP_TX_DUTYCYCLE_RND );
+			LoRaWAN.cycle(txDutyCycleTime);
+			deviceState = DEVICE_STATE_SLEEP;
+			break;
+		}
+		case DEVICE_STATE_SLEEP:
+		{
+      		LoRaWAN.displayAck();
+			LoRaWAN.sleep(loraWanClass);
+			break;
+		}
+		default:
+		{
+			deviceState = DEVICE_STATE_INIT;
+			break;
+		}
+	}
+	smartDelay(1000);
 }
