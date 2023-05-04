@@ -79,16 +79,80 @@ static void prepareTxFrame( uint8_t port )
 	*the max value for different DR can be found in MaxPayloadOfDatarateCN470 refer to DataratesCN470 and BandwidthsCN470 in "RegionCN470.h".
 	*/
     // This data can be changed, just make sure to change the datasize as well. 
-    appDataSize = 4;
-    appData[0] = 0x80;
+    appDataSize = 26;
+	//first byte for group 8 -- needed for decoder
+    appData[0] = 0x08;
+	//second byte for whether the parking spot is occupied or not -- 1 for occupied, 0 for unoccupied
     appData[1] = 0x00;
-    appData[2] = 0x00;
-    appData[3] = 0x01;
+	
+	// bytes 2-13 for latitude
+	long long lat = gps.location.lat();
+	int temp = lat%100;
+    appData[2] = temp;
+	lat = gps.location.lat() * 100;
+	temp = lat%100;
+    appData[3] = temp;
+	lat = gps.location.lat() * 10000;
+	temp = lat%100;
+	appData[4] = temp;
+	lat = gps.location.lat() * 1000000;
+	temp = lat%100;
+	appData[5] = temp;
+	lat = gps.location.lat() * 100000000;
+	temp = lat%100;
+	appData[6] = temp;
+	lat = gps.location.lat() * 10000000000;
+	temp = lat%100;
+	appData[7] = temp;
 
+	//bytes 8-13 are for longitude
+	long long lng = gps.location.lat();
+	int temp = lng%100;
+	appData[8] = temp;
+	lat = gps.location.lat() * 100;
+	temp = lat%100;
+	appData[9] = temp;
+	lat = gps.location.lat() * 10000;
+	temp = lat%100;
+	appData[10] = temp;
+	lat = gps.location.lat() * 1000000;
+	temp = lat%100;
+	appData[11] = temp;
+	lat = gps.location.lat() * 100000000;
+	temp = lat%100;
+	appData[12] = temp;
+	lat = gps.location.lat() * 10000000000;
+	temp = lat%100;
+	appData[13] = temp;
+
+	
 	Serial.println("Latitude: ");
-	Serial.println(gps.location.lat(), 6);
+	Serial.println(gps.location.lat(), 10);
 	Serial.println("Longitude: ");
-  	Serial.println(gps.location.lng(), 6);
+  	Serial.println(gps.location.lng(), 10);
+	
+	//long lat = gps.location.lat() * 10000000000;
+	/*
+	long long lat = gps.location.lat() * 100;
+	Serial.println(lat);
+	Serial.println(lat%100);
+
+	lat = gps.location.lat() * 10000;
+	Serial.println(lat);
+	Serial.println(lat%100);
+
+	lat = gps.location.lat() * 1000000;
+	Serial.println(lat);
+	Serial.println(lat%100);
+
+	lat = gps.location.lat() * 100000000;
+	Serial.println(lat);
+	Serial.println(lat%100);
+
+	lat = gps.location.lat() * 10000000000;
+	Serial.println(lat);
+	Serial.println(lat%100);
+	*/
 }
 
 static void smartDelay(unsigned long ms)
@@ -105,11 +169,9 @@ static void smartDelay(unsigned long ms)
  * Button interrupt handler
  * When button is pressed (interrupt), this function will be ran to handle it.
 */
-bool buttonPressed = false;
 void buttonIRQ() {
-  buttonPressed = true;
+  deviceState = DEVICE_STATE_SEND;
 }
-
 
 RTC_DATA_ATTR bool firstrun = true;
 
@@ -117,6 +179,11 @@ void setup() {
   Serial.begin(9600);
   ss.begin(GPSBaud);
   smartDelay(0);
+
+  //button interrupt
+  pinMode(button, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(button), buttonIRQ, RISING);
+
   Mcu.begin();
   if(firstrun)
   {
@@ -152,7 +219,7 @@ void loop()
       		LoRaWAN.displaySending();
 			prepareTxFrame( appPort );
 			LoRaWAN.send();
-			deviceState = DEVICE_STATE_CYCLE;
+			deviceState = DEVICE_STATE_SLEEP;
 			break;
 		}
 		case DEVICE_STATE_CYCLE:
