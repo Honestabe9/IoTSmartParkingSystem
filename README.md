@@ -16,7 +16,7 @@
 
 ### Idea Summary
 
-This project utilizes the Heltec LoRa development board with a GPS module<sup>1</sup> to develop a smart parking system for cities, driven by the need to address parking scarcity in busy areas. The increasing adoption of smart parking systems is expected in the near future<sup>2</sup>. In an ideal world, this approach would enable users to exchange information on parking spot availability through the MQTT network protocol (TCP/IP under the hood), resulting in reduced driving time and decreased accident risks. In our use case, the MQTT paradigm comprises of a Broker, Device Under Test (DUT), and Inspector, where the Broker serves as the access point, the DUT stores the data, and the Inspector manages button presses and input coordinates.
+This project utilizes mulitple Heltec LoRa development boards and a GPS module<sup>1</sup> to develop a smart parking system for cities, driven by the need to address parking scarcity in busy areas. The increasing adoption of smart parking systems is expected in the near future<sup>2</sup>. In an ideal world, this approach would enable users to exchange information on parking spot availability through the MQTT network protocol (TCP/IP under the hood), resulting in reduced driving time and decreased accident risks. In our use case, the MQTT paradigm comprises of a Broker, Device Under Test (DUT), and Inspector, where the Broker serves as the access point, the DUT stores the data, and the Inspector manages button presses and input coordinates.
 
 ---
 
