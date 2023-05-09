@@ -25,8 +25,9 @@ This project utilizes the Heltec LoRa development board with a GPS module<sup>1<
 #### Technologies
 Install the PlatformIO IDE Extension and follow the instructions for: 
 
-- VS Code (https://platformio.org/install/ide?install=vscode)
-- Atom (https://docs.platformio.org/en/latest/integration/ide/atom.html#installation)
+> VS Code → https://platformio.org/install/ide?install=vscode
+
+> Atom → https://docs.platformio.org/en/latest/integration/ide/atom.html#installation
 
 #### Tools
 Using this
