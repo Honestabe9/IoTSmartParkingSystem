@@ -17,7 +17,7 @@
 
 ### Idea Summary
 
-This project utilizes the Heltec LoRa development board with a GPS module to develop a smart parking system for cities, driven by the need to address parking scarcity in busy areas. The increasing adoption of smart parking systems is expected in the future<sup>1</sup>. The system enables users to exchange information on parking spot availability through the MQTT network protocol, resulting in reduced driving time and decreased accident risks. It comprises a Broker, Device Under Test (DUT), and Inspector, with the Broker serving as the access point, the DUT storing data, and the Inspector managing button inputs and coordinates.
+This project utilizes the Heltec LoRa development board with a GPS module<sup>1</sup> to develop a smart parking system for cities, driven by the need to address parking scarcity in busy areas. The increasing adoption of smart parking systems is expected in the future<sup>2</sup>. The system enables users to exchange information on parking spot availability through the MQTT network protocol, resulting in reduced driving time and decreased accident risks. It comprises a Broker, Device Under Test (DUT), and Inspector, with the Broker serving as the access point, the DUT storing data, and the Inspector managing button inputs and coordinates.
 
 ---
 
@@ -74,9 +74,8 @@ SOFTWARE.
 
 ### Additional References
 
-1. Chang, B. (2022, March 1). Smart parking system using IoT - Mokosmart.com. MOKOSmart #1 Smart Device Solution in China. https://www.mokosmart.com/smart-parking-system-using-iot/
-
-2. [91tuvtrO2jL.pdf](https://github.com/Honestabe9/IoTSmartParkingSystem/files/11425854/91tuvtrO2jL.pdf)
+1. [91tuvtrO2jL.pdf](https://github.com/Honestabe9/IoTSmartParkingSystem/files/11425854/91tuvtrO2jL.pdf)
+2. Chang, B. (2022, March 1). Smart parking system using IoT - Mokosmart.com. MOKOSmart #1 Smart Device Solution in China. https://www.mokosmart.com/smart-parking-system-using-iot/
 
 
 
