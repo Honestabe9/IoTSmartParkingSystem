@@ -9,6 +9,7 @@
 - [Tools and Technologies](#tools-and-technologies)
 - [How To](#how-to)
 - [Additional References](#additional-references)
+- [License](#license)
 - [Author Info](#author-info)
 
 ---
@@ -58,6 +59,16 @@ lib_deps =
 
 1. [91tuvtrO2jL.pdf](https://github.com/Honestabe9/IoTSmartParkingSystem/files/11425854/91tuvtrO2jL.pdf)
 2. Chang, B. (2022, March 1). Smart parking system using IoT - Mokosmart.com. MOKOSmart #1 Smart Device Solution in China. https://www.mokosmart.com/smart-parking-system-using-iot/
+
+
+
+---
+
+### License
+[MIT License](https://github.com/Honestabe9/IoTSmartParkingSystem/blob/main/LICENSE)
+
+
+
 
 
 
