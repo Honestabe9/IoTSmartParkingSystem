@@ -7,7 +7,7 @@
 
 - [Idea Summary](#idea-summary)
 - [Tools and Technologies](#tools-and-technologies)
-- [How to Use](#how-to-use)
+- [How To](#how-to)
 - [License](#license)
 - [Additional References](#additional-references)
 - [Author Info](#author-info)
@@ -34,7 +34,7 @@ Using this
 
 ---
 
-### How to Use
+### How To
 
 ```
 print(replace this)
