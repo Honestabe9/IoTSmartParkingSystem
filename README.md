@@ -46,7 +46,7 @@ Keep the following libraries from [Mikal Hart](https://github.com/mikalhart):
 
 ### How To
 
-Once your technologies and tools set up, you'll need to create a new project in PlatformIO. Give it a name, select the board as "Heltec WiFi LoRa 32 (V3)", keep the Arduino Framework, and your customary file location. 
+Once your technologies and tools are set up, you'll need to create a new project in PlatformIO. Give it a name, select the board as "Heltec WiFi LoRa 32 (V3)", keep the Arduino Framework, and your customary file location. 
 
 From then on a bunch of stuff in the environment will load in and be generated. In one of the files called "platform.ini"—which runs on the ESP32 platform—ensure that the default `monitor_speed` of 9600 is equal 115200 which is the fastest supported baud rate by Software Serial as of this post. Then, add this necessary library dependency, if it isn't already there, with this:
 
