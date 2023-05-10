@@ -62,7 +62,7 @@ Hook up the main GT-U7 module to its receiver and wire that to the Heltec LoRa a
 
 Afterward, once you get all of that situated, build and upload your code onto the LoRa. Arrange your port and serial monitor to work accordingly, and get to running!
 
-> Side Note - Other than that use the `PRG` button to program which ought to gather the dimensions (hardcoded or not) for parking spots and/or determine if they are occupied/unoccupied in the lot of choice. Hit `RST` to reset and re-run/refresh the monitor from whatever has been collected.
+> Side Note - Other than that, use the `PRG` button to program which ought to gather the dimensions (hardcoded or not) for parking spots and/or determine if they are occupied/unoccupied in the lot of choice. Hit `RST` to reset and re-run/refresh the monitor from whatever has been collected.
 
 ---
 
