@@ -26,18 +26,19 @@ This project utilizes mulitple Heltec LoRa development boards and a GPS module<s
 #### Technologies
 Install the PlatformIO IDE Extension and follow the instructions for: 
 
-> VS Code → https://platformio.org/install/ide?install=vscode
+* VS Code → https://platformio.org/install/ide?install=vscode;
 
-> Atom → https://docs.platformio.org/en/latest/integration/ide/atom.html#installation
+* Atom → https://docs.platformio.org/en/latest/integration/ide/atom.html#installation.
 
 
 #### Tools
 Keep the following libraries from [Mikal Hart](https://github.com/mikalhart):
 
-> TinyMQTT → https://github.com/hsaturn/TinyMqtt
-> TinyGPSPlus → https://github.com/mikalhart/TinyGPSPlus
+* TinyMQTT → https://github.com/hsaturn/TinyMqtt;
 
-> SoftwareSerial Library → https://docs.arduino.cc/learn/built-in-libraries/software-serial
+* TinyGPSPlus → https://github.com/mikalhart/TinyGPSPlus;
+
+* SoftwareSerial Library → https://docs.arduino.cc/learn/built-in-libraries/software-serial.
 
 ---
 
@@ -47,18 +48,19 @@ Once your technologies and tools set up, you'll need to create a new project in 
 
 From then on a bunch of stuff in the environment will load in and be generated. In one of the files called "platform.ini"—which runs on the ESP32 platform—ensure that the default `monitor_speed` of 9600 is equal 115200 which is the fastest supported baud rate by Software Serial as of this post. Then, add this necessary library dependency, if it isn't already there, with this:
 
-```
+```C
 lib_deps =
   https://github.com/hsaturn/TinyMqtt.git#0.9.12
   hsaturn/TinyConsole@0.4.2
 ```
 
-- Attach the antenna of your LoRa devices, configure them to be connected to your computing machines (mainly PCs/laptops) with your USB (Type-C) cable of choice, be within range of an accessible MQTT server, and 
-- Hook up the main GT-U7 module to its receiver and wire that to the Heltec LoRa according to the correct pins from the [rough wiring diagram](https://github.com/Honestabe9/IoTSmartParkingSystem/blob/main/Group8Final/DemoSlides/IoT%20Smart%20Parking%20System%20-%20Demo.pdf). You can reference Heltec Automation's [pin map](https://github.com/Honestabe9/IoTSmartParkingSystem/blob/main/Group8Final/FinalWiFi/HTIT-WB32LA(F)_V3.png) and [schematic](https://github.com/Honestabe9/IoTSmartParkingSystem/blob/main/Group8Final/FinalWiFi/HTIT-WB32LA(F)_V3_Schematic_Diagram.pdf) of the device to double-check connections.
+As this is finished, attach the antenna of your LoRa devices, configure them to be connected to your computing machines (mainly PCs/laptops) with your USB (Type-C) cable of choice, and be within range of an accessible MQTT server.
+
+Hook up the main GT-U7 module to its receiver and wire that to the Heltec LoRa according to the correct pins from the [rough wiring diagram](https://github.com/Honestabe9/IoTSmartParkingSystem/blob/main/Group8Final/DemoSlides/IoT%20Smart%20Parking%20System%20-%20Demo.pdf). You can reference Heltec Automation's [pin map](https://github.com/Honestabe9/IoTSmartParkingSystem/blob/main/Group8Final/FinalWiFi/HTIT-WB32LA(F)_V3.png) and [schematic](https://github.com/Honestabe9/IoTSmartParkingSystem/blob/main/Group8Final/FinalWiFi/HTIT-WB32LA(F)_V3_Schematic_Diagram.pdf) of the device to double-check connections.
 
 Afterward, once you get all of that situated, get build and upload your code onto the LoRa. Arrange your port and serial monitor to work accordingly, and get running!
 
-Other than that use the `PRG` button to program which ought to gather the dimensions (hardcoded or not) for parking spots and/or determine if they are occupied/unoccupied in the lot of choice. Hit `RST` to reset and re-run/refresh the monitor from whatever has been collected.
+> Side Note - Other than that use the `PRG` button to program which ought to gather the dimensions (hardcoded or not) for parking spots and/or determine if they are occupied/unoccupied in the lot of choice. Hit `RST` to reset and re-run/refresh the monitor from whatever has been collected.
 
 ---
 
