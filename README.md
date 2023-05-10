@@ -10,7 +10,7 @@
 - [How To](#how-to)
 - [Additional References](#additional-references)
 - [License](#license)
-- [Author Info](#author-info)
+- [Authors Info](#authors-info)
 
 ---
 
@@ -18,6 +18,13 @@
 ### Idea Summary
 
 This project utilizes mulitple Heltec LoRa development boards and a GPS module<sup>1</sup> to develop a smart parking system for cities, driven by the need to address parking scarcity in busy areas. The increasing adoption of smart parking systems is expected in the near future<sup>2</sup>. In an ideal world, this approach would enable users to exchange information on parking spot availability through the MQTT network protocol (TCP/IP under the hood), resulting in reduced driving time and decreased accident risks. In our use case, the MQTT publish-subcribe paradigm comprises of a Broker, Device Under Test (DUT), and Inspector, where the Broker serves as the access point, the DUT stores the data, and the Inspector manages button input and coordinates. The overall notion is to allow them to send (publish) and receive (subscribe) a topic (category) saved as a UTF-8 string that can provide geographical details setting the spots in a lot, and  which parking spots are taken and which are available: all with button-presses.
+
+
+
+
+_Pictorial Representation of Concept_
+
+![FinPrjDiagram2](https://github.com/Honestabe9/IoTSmartParkingSystem/assets/46213695/8823c79a-8de2-4128-87f3-72fc5e57c13c)
 
 ---
 
@@ -83,6 +90,6 @@ Afterward, once you get all of that situated, get build and upload your code ont
 
 ---
 
-### Author Info
+### Authors Info
 
 - UVA Students: Abel Ressom, James Zhu, and Josh Lee
