@@ -32,18 +32,20 @@ Install the PlatformIO IDE Extension and follow the instructions for:
 
 
 #### Tools
-Using this
+Keep the following libraries from [Mikal Hart](https://github.com/mikalhart):
+
+> TinyMQTT → https://github.com/hsaturn/TinyMqtt
+> TinyGPSPlus → https://github.com/mikalhart/TinyGPSPlus
+
+> SoftwareSerial Library → https://docs.arduino.cc/learn/built-in-libraries/software-serial
 
 ---
 
 ### How To
 
-Once you have that set up, you'll need to create a new project in PlatformIO. Give it a name, select the board as "Heltec WiFi LoRa 32 (V3)", keep the Arduino Framework, and your customary file location. 
+Once your technologies and tools set up, you'll need to create a new project in PlatformIO. Give it a name, select the board as "Heltec WiFi LoRa 32 (V3)", keep the Arduino Framework, and your customary file location. 
 
-From there on a bunch of stuff in the environment will load in and be generated. In one of the files called "platform.ini" do the following:
-
-- Ensure that the default `monitor_speed` of 9600 is equal 115200 which is the fastest supported baud rate by Software Serial as of this post.
-- Add this necessary library dependency, if it isn't already there, with this:
+From then on a bunch of stuff in the environment will load in and be generated. In one of the files called "platform.ini"—which runs on the ESP32 platform—ensure that the default `monitor_speed` of 9600 is equal 115200 which is the fastest supported baud rate by Software Serial as of this post. Then, add this necessary library dependency, if it isn't already there, with this:
 
 ```
 lib_deps =
@@ -51,7 +53,8 @@ lib_deps =
   hsaturn/TinyConsole@0.4.2
 ```
 
-- Attach the antenna of your LoRa devices, configure them to be connected to your computing machines (mainly PCs/laptops) with your USB (Type-C) cable of choice, and be within range of an MQTT server, 
+- Attach the antenna of your LoRa devices, configure them to be connected to your computing machines (mainly PCs/laptops) with your USB (Type-C) cable of choice, be within range of an accessible MQTT server, and 
+- Hook up the main GT-U7 module and receiver with the Heltec LoRa board, then
 
 ---
 
