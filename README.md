@@ -54,7 +54,11 @@ lib_deps =
 ```
 
 - Attach the antenna of your LoRa devices, configure them to be connected to your computing machines (mainly PCs/laptops) with your USB (Type-C) cable of choice, be within range of an accessible MQTT server, and 
-- Hook up the main GT-U7 module and receiver with the Heltec LoRa board, then
+- Hook up the main GT-U7 module to its receiver and wire that to the Heltec LoRa according to the correct pins from the [rough wiring diagram](https://github.com/Honestabe9/IoTSmartParkingSystem/blob/main/Group8Final/DemoSlides/IoT%20Smart%20Parking%20System%20-%20Demo.pdf). You can reference Heltec Automation's [pin map](https://github.com/Honestabe9/IoTSmartParkingSystem/blob/main/Group8Final/FinalWiFi/HTIT-WB32LA(F)_V3.png) and [schematic](https://github.com/Honestabe9/IoTSmartParkingSystem/blob/main/Group8Final/FinalWiFi/HTIT-WB32LA(F)_V3_Schematic_Diagram.pdf) of the device to double-check connections.
+
+Afterward, once you get all of that situated, get build and upload your code onto the LoRa. Arrange your port and serial monitor to work accordingly, and get running!
+
+Other than that use the `PRG` button to program which ought to gather the dimensions (hardcoded or not) for parking spots and/or determine if they are occupied/unoccupied in the lot of choice. Hit `RST` to reset and re-run/refresh the monitor from whatever has been collected.
 
 ---
 
