@@ -87,5 +87,4 @@ Afterward, once you get all of that situated, build and upload your code onto th
 
 ### Authors Info
 
-- UVA Students: Abel Ressom, James Zhu, and Josh Lee
 - Group #8
